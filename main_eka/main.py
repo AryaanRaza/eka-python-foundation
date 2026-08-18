@@ -6,7 +6,7 @@ knowledge = []
 def create_knowledge(title , content , category , source):
 
     if title == "":
-        print("Title cannot be empty.")
+        print("Error: Title cannot be empty.")
         return None
 
     if content == "":
@@ -31,29 +31,41 @@ print(project_name)
 print(f"Version: {version}")
 print("=" * 40)
 
-for i in range(2):
-    print(f"\nKnowledge #{i + 1}")
 
-    title = input("Enter knowledge title: ")
-    content = input("Enter knowledge: ")
-    category = input("Enter knowledge category: ")
-    if category == "HR":
-        print("Category recognized: Human Resources")
+while True:
+    print("\n=== EKA MENU ===")
+    print("1. Add Knowledge")
+    print("2. View Knowledge")
+    print("3. Exit")
 
-    elif category == "IT":
-        print("Category recognized: Information Technology")
+    choice = input("Choose an option: ")
+
+    if choice == "1":
+        title = input("Enter knowledge title: ")
+        content = input("Enter knowledge: ")
+        category = input("Enter knowledge category: ")
+        source = input("Enter knowledge source: ")
+        knowledge_item = create_knowledge(title , content , category , source)
+
+        if(knowledge_item is not None):
+            knowledge.append(knowledge_item)
+            print("Knowledge added succesfully")
+
+    elif choice == "2":
+        print("\n=== EKA Knowledge Base ===")
+        if len(knowledge) == 0:
+            print("No knowledge available")
+
+        else:
+            for item in knowledge:
+                print("\nTitle:", item["title"])
+                print("Content:", item["content"])
+                print("Category:", item["category"])
+                print("Source:", item["source"])
+            
+    elif choice == "3":
+        print("Exiting EKA...")
+        break
+
     else:
-        print("Category: General")
-    source = input("Enter knowledge source: ")
-
-    knowledge_item = create_knowledge(title , content , category , source)
-    if(knowledge_item is not None):
-        knowledge.append(knowledge_item)
-
-print("\n=== EKA Knowledge Base ===")
-
-for item in knowledge:
-    print("\nTitle:", item["title"])
-    print("Content:", item["content"])
-    print("Category:", item["category"])
-    print("Source:", item["source"])
+        print("Incalid option . Please choose 1 , 2 or 3.")
