@@ -1,5 +1,5 @@
 project_name = "Enterprise Knowledge Assistant"
-version = "0.2"
+version = "0.3"
 
 knowledge = []
 
@@ -13,14 +13,18 @@ for i in range(3):
 
     title = input("Enter knowledge title: ")
     content = input("Enter knowledge: ")
+    category = input("Enter knowledge category: ")
 
-    knowledge.append({
+    knowledge_item = {
         "title": title,
-        "content": content
-    })
+        "content": content,
+        "category": category
+    }
+    knowledge.append(knowledge_item)
 
 print("\n=== EKA Knowledge Base ===")
 
 for item in knowledge:
     print("\nTitle:", item["title"])
+    print("Category:", item["category"])
     print("Content:", item["content"])
