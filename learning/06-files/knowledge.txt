@@ -1,0 +1,2 @@
+EKA is learning to remember information.
+Python can work with files.
