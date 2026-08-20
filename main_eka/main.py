@@ -28,11 +28,14 @@ def create_knowledge(title , content , category , source):
 
 def save_knowledge():
 
-    # Open the knowledge file in write mode.
-    with open("knowledge.json", "w") as file:
+    try:
 
-        # Convert the Python knowledge list into JSON.
-        json.dump(knowledge, file, indent=4)
+        # Open the knowledge file in write mode.
+        with open("knowledge.json", "w") as file:
+            # Convert the Python knowledge list into JSON.
+            json.dump(knowledge, file, indent=4)
+    except OSError:
+        print("Error: Could not save knowledge. ")
 
 
 def load_knowledge():
@@ -51,8 +54,13 @@ def load_knowledge():
 
         # If this is the first time EKA is running,
         # there may not be a knowledge file yet.
+        print("No knowledge file found. Starting with empty knowledge.")
         knowledge = []
 
+    except json.JSONDecodeError:
+        print("Knowledge file is corrupted.")
+        print("Starting with empty knowledge.")
+        knowledge = []
 
 # Load previously saved knowledge when EKA starts.
 load_knowledge()

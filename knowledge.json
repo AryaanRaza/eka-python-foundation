@@ -1,14 +1,8 @@
 [
     {
-        "title": "Leave Policy",
-        "content": "20 days approval",
-        "category": "Policy",
-        "source": "HR"
-    },
-    {
-        "title": "CGPA Requirement",
-        "content": "CGPA must be greater than 8",
-        "category": "Academics",
-        "source": "Company Policy"
+        "title": "hr",
+        "content": "LEave policy",
+        "category": "de",
+        "source": "rfv"
     }
 ]
