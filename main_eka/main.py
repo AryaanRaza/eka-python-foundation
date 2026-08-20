@@ -1,30 +1,9 @@
 import json
+import knowledge
 project_name = "Enterprise Knowledge Assistant"
-version = "0.3"
+version = "0.7"
 
-knowledge = []
-
-def create_knowledge(title , content , category , source):
-
-    if title == "":
-        print("Error: Title cannot be empty.")
-        return None
-
-    if content == "":
-        print("Error: Content cannot be empty.")
-        return None
-
-    if category == "":
-        print("Error: Category cannot be empty.")
-        return None
-
-    knowledge_item = {
-        "title": title,
-        "content": content,
-        "category": category,
-        "source": source,
-    }
-    return knowledge_item
+knowledge_items = []
 
 def save_knowledge():
 
@@ -33,14 +12,14 @@ def save_knowledge():
         # Open the knowledge file in write mode.
         with open("knowledge.json", "w") as file:
             # Convert the Python knowledge list into JSON.
-            json.dump(knowledge, file, indent=4)
+            json.dump(knowledge_items, file, indent=4)
     except OSError:
         print("Error: Could not save knowledge. ")
 
 
 def load_knowledge():
 
-    global knowledge
+    global knowledge_items
 
     try:
 
@@ -48,19 +27,19 @@ def load_knowledge():
         with open("knowledge.json", "r") as file:
 
             # Convert JSON back into Python data.
-            knowledge = json.load(file)
+            knowledge_items = json.load(file)
 
     except FileNotFoundError:
 
         # If this is the first time EKA is running,
         # there may not be a knowledge file yet.
         print("No knowledge file found. Starting with empty knowledge.")
-        knowledge = []
+        knowledge_items = []
 
     except json.JSONDecodeError:
         print("Knowledge file is corrupted.")
         print("Starting with empty knowledge.")
-        knowledge = []
+        knowledg_items = []
 
 # Load previously saved knowledge when EKA starts.
 load_knowledge()
@@ -84,26 +63,17 @@ while True:
         content = input("Enter knowledge: ")
         category = input("Enter knowledge category: ")
         source = input("Enter knowledge source: ")
-        knowledge_item = create_knowledge(title , content , category , source)
+        knowledge_item = knowledge.create_knowledge(title , content , category , source)
 
         if(knowledge_item is not None):
-            knowledge.append(knowledge_item)
+            knowledge_items.append(knowledge_item)
             # Save immediately after adding knowledge.
             save_knowledge()
             print("Knowledge added succesfully")
 
     elif choice == "2":
-        print("\n=== EKA Knowledge Base ===")
-        if len(knowledge) == 0:
-            print("No knowledge available")
+        knowledge.display_knowledge(knowledge_items)
 
-        else:
-            for item in knowledge:
-                print("\nTitle:", item["title"])
-                print("Content:", item["content"])
-                print("Category:", item["category"])
-                print("Source:", item["source"])
-            
     elif choice == "3":
         print("Exiting EKA...")
         break

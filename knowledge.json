@@ -4,5 +4,17 @@
         "content": "LEave policy",
         "category": "de",
         "source": "rfv"
+    },
+    {
+        "title": "CGPA",
+        "content": "7.5",
+        "category": "Acdemic",
+        "source": "Academic Thresholds"
+    },
+    {
+        "title": "Working",
+        "content": "9am - 5pm",
+        "category": "Working Hours",
+        "source": "Comany Rule Book"
     }
 ]
