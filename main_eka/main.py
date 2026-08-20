@@ -1,54 +1,15 @@
-import json
 import knowledge
+import storage
 project_name = "Enterprise Knowledge Assistant"
-version = "0.7"
-
-knowledge_items = []
-
-def save_knowledge():
-
-    try:
-
-        # Open the knowledge file in write mode.
-        with open("knowledge.json", "w") as file:
-            # Convert the Python knowledge list into JSON.
-            json.dump(knowledge_items, file, indent=4)
-    except OSError:
-        print("Error: Could not save knowledge. ")
-
-
-def load_knowledge():
-
-    global knowledge_items
-
-    try:
-
-        # Open the existing knowledge file.
-        with open("knowledge.json", "r") as file:
-
-            # Convert JSON back into Python data.
-            knowledge_items = json.load(file)
-
-    except FileNotFoundError:
-
-        # If this is the first time EKA is running,
-        # there may not be a knowledge file yet.
-        print("No knowledge file found. Starting with empty knowledge.")
-        knowledge_items = []
-
-    except json.JSONDecodeError:
-        print("Knowledge file is corrupted.")
-        print("Starting with empty knowledge.")
-        knowledg_items = []
+version = "0.8"
 
 # Load previously saved knowledge when EKA starts.
-load_knowledge()
+knowledge_items = storage.load_data("main_eka/knowledge.json")
 
 print("=" * 40)
 print(project_name)
 print(f"Version: {version}")
 print("=" * 40)
-
 
 while True:
     print("\n=== EKA MENU ===")
@@ -68,8 +29,12 @@ while True:
         if(knowledge_item is not None):
             knowledge_items.append(knowledge_item)
             # Save immediately after adding knowledge.
-            save_knowledge()
-            print("Knowledge added succesfully")
+            saved = storage.save_data(knowledge_items,"main_eka/knowledge.json")
+            if saved:
+                print("Knowledge added and saved.")
+            else:
+                print("Knowledge added, but could not be saved.")
+
 
     elif choice == "2":
         knowledge.display_knowledge(knowledge_items)
@@ -79,4 +44,4 @@ while True:
         break
 
     else:
-        print("Incalid option . Please choose 1 , 2 or 3.")
+        print("Invalid option . Please choose 1 , 2 or 3.")

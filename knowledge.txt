@@ -1,3 +1,0 @@
-
-Python can work with files.
-Python can work with files.

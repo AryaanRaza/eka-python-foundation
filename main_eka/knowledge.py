@@ -12,6 +12,9 @@ def create_knowledge(title , content , category , source):
     if category == "":
         print("Error: Category cannot be empty.")
         return None
+    if source == "":
+        print("Error: Category cannot be empty.")
+        return None
 
     knowledge_item = {
         "title": title,
