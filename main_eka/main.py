@@ -1,3 +1,4 @@
+import json
 project_name = "Enterprise Knowledge Assistant"
 version = "0.3"
 
@@ -25,6 +26,36 @@ def create_knowledge(title , content , category , source):
     }
     return knowledge_item
 
+def save_knowledge():
+
+    # Open the knowledge file in write mode.
+    with open("knowledge.json", "w") as file:
+
+        # Convert the Python knowledge list into JSON.
+        json.dump(knowledge, file, indent=4)
+
+
+def load_knowledge():
+
+    global knowledge
+
+    try:
+
+        # Open the existing knowledge file.
+        with open("knowledge.json", "r") as file:
+
+            # Convert JSON back into Python data.
+            knowledge = json.load(file)
+
+    except FileNotFoundError:
+
+        # If this is the first time EKA is running,
+        # there may not be a knowledge file yet.
+        knowledge = []
+
+
+# Load previously saved knowledge when EKA starts.
+load_knowledge()
 
 print("=" * 40)
 print(project_name)
@@ -49,6 +80,8 @@ while True:
 
         if(knowledge_item is not None):
             knowledge.append(knowledge_item)
+            # Save immediately after adding knowledge.
+            save_knowledge()
             print("Knowledge added succesfully")
 
     elif choice == "2":
