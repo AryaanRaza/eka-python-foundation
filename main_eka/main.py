@@ -20,7 +20,6 @@ while True:
     print("4. Exit")
 
     choice = input("Choose an option: ")
-
     if choice == "1":
         title = input("Enter knowledge title: ")
         content = input("Enter knowledge: ")
