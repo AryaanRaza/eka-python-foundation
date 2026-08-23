@@ -13,7 +13,7 @@ def create_knowledge(title , content , category , source):
         print("Error: Category cannot be empty.")
         return None
     if source == "":
-        print("Error: Category cannot be empty.")
+        print("Error: Source cannot be empty.")
         return None
 
     knowledge_item = {
@@ -35,3 +35,23 @@ def display_knowledge(knowledge_items):
                 print("Content:", item["content"])
                 print("Category:", item["category"])
                 print("Source:", item["source"])
+
+def search_knowledge(knowledge_items , search_text):
+
+    search_text = search_text.strip().lower()
+
+    found = False
+    presentIn = []
+
+    for item in knowledge_items:
+        if search_text in item["title"].lower():
+            found = True
+            presentIn.append(item)
+
+    if found:
+        print("Knowledge is present in the following texts")
+    else:
+        print("Given knowledge is not present")
+        
+    return presentIn
+    

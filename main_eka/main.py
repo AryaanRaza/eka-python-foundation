@@ -15,7 +15,8 @@ while True:
     print("\n=== EKA MENU ===")
     print("1. Add Knowledge")
     print("2. View Knowledge")
-    print("3. Exit")
+    print("3. Search Knowledge")
+    print("4. Exit")
 
     choice = input("Choose an option: ")
 
@@ -40,6 +41,13 @@ while True:
         knowledge.display_knowledge(knowledge_items)
 
     elif choice == "3":
+        search = input("Enter the knowledge keyword you want to search for: ")
+        value = knowledge.search_knowledge(knowledge_items , search)
+        if len(value) !=  0:
+            knowledge.display_knowledge(value)
+
+    
+    elif choice == "4":
         print("Exiting EKA...")
         break
 

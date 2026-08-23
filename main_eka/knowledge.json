@@ -4,5 +4,11 @@
         "content": "Leave should be informed 20 days prior",
         "category": "Company leaves",
         "source": "leave Book"
+    },
+    {
+        "title": "CGPA Requirements",
+        "content": "CGPA should be atleast 8",
+        "category": "Academics",
+        "source": "Academic Policy"
     }
 ]
