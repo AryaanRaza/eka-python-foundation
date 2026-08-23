@@ -61,5 +61,5 @@ def search_knowledge(knowledge_items , search_text):
         print("Given knowledge is not present")
         
     return matching_items
-    return matching_items
+
     
