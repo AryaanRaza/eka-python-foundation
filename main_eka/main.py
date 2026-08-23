@@ -1,5 +1,6 @@
 import knowledge
 import storage
+
 project_name = "Enterprise Knowledge Assistant"
 version = "0.8"
 
@@ -25,28 +26,27 @@ while True:
         content = input("Enter knowledge: ")
         category = input("Enter knowledge category: ")
         source = input("Enter knowledge source: ")
-        knowledge_item = knowledge.create_knowledge(title , content , category , source)
+        knowledge_item = knowledge.create_knowledge(title, content, category, source)
 
-        if(knowledge_item is not None):
+        if knowledge_item is not None:
             knowledge_items.append(knowledge_item)
             # Save immediately after adding knowledge.
-            saved = storage.save_data(knowledge_items,"main_eka/knowledge.json")
+            saved = storage.save_data(knowledge_items, "main_eka/knowledge.json")
             if saved:
                 print("Knowledge added and saved.")
             else:
                 print("Knowledge added, but could not be saved.")
 
-
     elif choice == "2":
         knowledge.display_knowledge(knowledge_items)
 
     elif choice == "3":
-        search = input("Enter the knowledge keyword you want to search for: ")
-        value = knowledge.search_knowledge(knowledge_items , search)
-        if len(value) !=  0:
-            knowledge.display_knowledge(value)
+       search_text = input("Enter the knowledge keyword you want to search for: ")
+       search_results = knowledge.search_knowledge(knowledge_items, search_text)
 
-    
+       if len(search_results) != 0:
+            knowledge.display_knowledge(search_results)
+
     elif choice == "4":
         print("Exiting EKA...")
         break

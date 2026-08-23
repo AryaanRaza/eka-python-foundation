@@ -39,19 +39,26 @@ def display_knowledge(knowledge_items):
 def search_knowledge(knowledge_items , search_text):
 
     search_text = search_text.strip().lower()
+    
+    if search_text == " ":
+        print("Search cannot be empty")
+        return []
 
-    found = False
-    presentIn = []
 
-    for item in knowledge_items:
-        if search_text in item["title"].lower():
-            found = True
-            presentIn.append(item)
+    matching_items = []
 
-    if found:
+    for knowledge_item in knowledge_items:
+            # Check if the search text is present in any value of the knowledge dictionary.
+            # item.values() gives all dictionary values (title, content, category, source).
+            # str(value).lower() converts each value to lowercase for case-insensitive searching.
+            # any() returns True if the search text is found in at least one value.
+            if any(search_text in str(value).lower() for value in knowledge_item.values()):
+                matching_items.append(knowledge_item)
+
+    if matching_items:
         print("Knowledge is present in the following texts")
     else:
         print("Given knowledge is not present")
         
-    return presentIn
+    return matching_items
     
