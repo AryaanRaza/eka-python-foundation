@@ -39,8 +39,8 @@ def display_knowledge(knowledge_items):
 def search_knowledge(knowledge_items , search_text):
 
     search_text = search_text.strip().lower()
-    
-    if search_text == " ":
+
+    if search_text == "":
         print("Search cannot be empty")
         return []
 
