@@ -40,10 +40,32 @@ while True:
         knowledge.display_knowledge(knowledge_items)
 
     elif choice == "3":
-       search_text = input("Enter the knowledge keyword you want to search for: ")
-       search_results = knowledge.search_knowledge(knowledge_items, search_text)
+        search_text = input("Enter the knowledge keyword you want to search for: ")
+        field_choices = {
+            "1": "all",
+            "2": "title",
+            "3": "content",
+            "4": "category",
+            "5": "source",
+        }
+        print("Search in : \n")
+        print("1. All fields")
+        print("2. Title")
+        print("3. Content")
+        print("4. Category")
+        print("5. Source")
+        field = input("Your choice: ")
+        field_search = field_choices.get(field)
 
-       if len(search_results) != 0:
+        if field_search is None:
+            print("Invalid search field. Please choose 1, 2, 3, 4 or 5.")
+            continue
+        else:
+            search_results = knowledge.search_knowledge(
+                knowledge_items, search_text, field_search
+            )
+
+        if len(search_results) != 0:
             knowledge.display_knowledge(search_results)
 
     elif choice == "4":
