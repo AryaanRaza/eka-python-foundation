@@ -26,14 +26,47 @@ def create_knowledge(title, content, category, source):
     return knowledge_item
 
 
+def delete_knowledge(knowledge_items):
+
+    # Check if the knowledge base is empty before asking the user for a number.
+    if len(knowledge_items) == 0:
+        print("No knowledge available")
+        return knowledge_items
+
+    try:
+        # Take the knowledge number displayed to the user and convert it to an integer.
+        knowledge_number = int(
+            input("Enter the number of the knowledge to delete: ")
+        )
+
+    except ValueError:
+        # Handle cases where the user enters something that is not a valid number.
+        print("Invalid number.")
+        return knowledge_items
+
+    # Make sure the selected number corresponds to an existing knowledge item.
+    if knowledge_number < 1 or knowledge_number > len(knowledge_items):
+        print(f"Invalid number. Choose a number between 1 - {len(knowledge_items)}")
+        return knowledge_items
+
+    # Python list indexes start from 0, while the user sees knowledge numbers starting from 1.
+    # Subtract 1 to convert the user's number into the correct list index.
+    knowledge_items.pop(knowledge_number - 1)
+
+    # Return the updated knowledge list to main.py.
+    return knowledge_items
+
+
+
 def display_knowledge(knowledge_items):
     print("\n=== EKA Knowledge Base ===")
     if len(knowledge_items) == 0:
         print("No knowledge available")
 
     else:
-        for item in knowledge_items:
-            print("\nTitle:", item["title"])
+        for index , item in enumerate(knowledge_items , start = 1):
+            print("\n\n     Knowledge " , index)
+            print("Title:", item["title"])
             print("Content:", item["content"])
             print("Category:", item["category"])
             print("Source:", item["source"])

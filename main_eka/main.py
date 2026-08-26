@@ -17,7 +17,8 @@ while True:
     print("1. Add Knowledge")
     print("2. View Knowledge")
     print("3. Search Knowledge")
-    print("4. Exit")
+    print("4. Delete Knowledge")
+    print("5. Exit")
 
     choice = input("Choose an option: ")
     if choice == "1":
@@ -69,8 +70,19 @@ while True:
             knowledge.display_knowledge(search_results)
 
     elif choice == "4":
+        knowledge_items = knowledge.delete_knowledge(knowledge_items)
+        # Save immediately after deleting knowledge.
+
+        saved = storage.save_data(knowledge_items, "main_eka/knowledge.json")
+        if saved:
+            print("Knowledge deleted and saved.")
+        else:
+            print("Knowledge deleted, but could not be saved.")
+
+    elif choice == "5":
         print("Exiting EKA...")
         break
 
+
     else:
-        print("Invalid option . Please choose 1 , 2  , 3 or 4.")
+        print("Invalid option . Please choose 1 , 2  , 3 , 4 or 5.")
