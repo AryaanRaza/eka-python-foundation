@@ -10,5 +10,11 @@
         "content": "Minimum CGPA: 8",
         "category": "8.0",
         "source": "Acadmic policy"
+    },
+    {
+        "title": "Python Programming",
+        "content": "Python is a programming language",
+        "category": "Programming",
+        "source": "Python Docs"
     }
 ]

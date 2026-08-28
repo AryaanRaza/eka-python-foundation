@@ -58,6 +58,72 @@ def delete_knowledge(knowledge_items):
 
 
 
+def update_knowledge(knowledge_items):
+
+    # Check whether there is any knowledge available to update.
+    if len(knowledge_items) == 0:
+        print("No knowledge available.")
+        return knowledge_items
+
+    # Display all knowledge items with numbers so the user
+    # can select which record they want to update.
+    print("\n=== Select Knowledge to Update ===")
+
+    for index, item in enumerate(knowledge_items):
+        print(f"{index + 1}. {item['title']}")
+
+    # Ask the user which knowledge item they want to update.
+    try:
+        choice = int(input("Enter the number of the knowledge to update: "))
+
+        # The user sees numbers starting from 1,
+        # but Python list indexes start from 0.
+        if choice < 1 or choice > len(knowledge_items):
+            print("Invalid knowledge number.")
+            return knowledge_items
+
+        # Convert the user's number into the correct list index.
+        knowledge_item = knowledge_items[choice - 1]
+
+        print("\n=== Current Knowledge ===")
+        print("Title:", knowledge_item["title"])
+        print("Content:", knowledge_item["content"])
+        print("Category:", knowledge_item["category"])
+        print("Source:", knowledge_item["source"])
+
+        print("\nPress Enter if you want to keep the current value.")
+
+        # Ask for the new values.
+        new_title = input("New title: ").strip()
+        new_content = input("New content: ").strip()
+        new_category = input("New category: ").strip()
+        new_source = input("New source: ").strip()
+
+        # Only update a field if the user entered something.
+        # Pressing Enter keeps the existing value.
+        if new_title != "":
+            knowledge_item["title"] = new_title
+
+        if new_content != "":
+            knowledge_item["content"] = new_content
+
+        if new_category != "":
+            knowledge_item["category"] = new_category
+
+        if new_source != "":
+            knowledge_item["source"] = new_source
+
+        print("\nKnowledge updated successfully.")
+
+    except ValueError:
+        # int() raises ValueError if the user enters something
+        # that cannot be converted into a number.
+        print("Invalid input. Please enter a number.")
+
+    return knowledge_items
+
+
+
 def display_knowledge(knowledge_items):
     print("\n=== EKA Knowledge Base ===")
     if len(knowledge_items) == 0:
@@ -81,9 +147,6 @@ def search_knowledge(knowledge_items, search_text, search_field):
         return []
 
     matching_items = []
-
-    
-
 
     for knowledge_item in knowledge_items:
 
