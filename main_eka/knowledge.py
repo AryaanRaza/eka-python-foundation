@@ -33,6 +33,9 @@ def delete_knowledge(knowledge_items):
         print("No knowledge available")
         return knowledge_items
 
+    print("\n=== Select Knowledge to Delete ===")
+    display_knowledge_titles(knowledge_items)
+
     try:
         # Take the knowledge number displayed to the user and convert it to an integer.
         knowledge_number = int(
@@ -69,8 +72,7 @@ def update_knowledge(knowledge_items):
     # can select which record they want to update.
     print("\n=== Select Knowledge to Update ===")
 
-    for index, item in enumerate(knowledge_items):
-        print(f"{index + 1}. {item['title']}")
+    display_knowledge_titles(knowledge_items)
 
     # Ask the user which knowledge item they want to update.
     try:
@@ -125,17 +127,27 @@ def update_knowledge(knowledge_items):
 
 
 def display_knowledge(knowledge_items):
-    print("\n=== EKA Knowledge Base ===")
     if len(knowledge_items) == 0:
         print("No knowledge available")
 
     else:
+        print("\n=== EKA Knowledge Base ===")
         for index , item in enumerate(knowledge_items , start = 1):
             print("\n\n     Knowledge " , index)
             print("Title:", item["title"])
             print("Content:", item["content"])
             print("Category:", item["category"])
             print("Source:", item["source"])
+
+def display_knowledge_titles(knowledge_items):
+    if len(knowledge_items) == 0:
+        print("No knowledge available")
+        return
+    print("\n=== Knowledge Titles ")
+
+    for index , item in enumerate(knowledge_items , start = 1):
+
+        print(f"{index}. {item["title"]}")
 
 
 def search_knowledge(knowledge_items, search_text, search_field):
