@@ -150,7 +150,7 @@ def display_knowledge_titles(knowledge_items):
         print(f"{index}. {item["title"]}")
 
 
-def search_knowledge(knowledge_items, search_text, search_field):
+def search_knowledge(knowledge_items, search_text, search_field = "all"):
 
     search_text = search_text.strip().lower()
 
